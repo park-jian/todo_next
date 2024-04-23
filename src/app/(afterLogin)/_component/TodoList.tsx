@@ -1,5 +1,5 @@
 "use client";
-import React, {useState, useEffect }  from 'react';
+import React, {useState, useEffect, useCallback }  from 'react';
 import Todo from "@/app/(afterLogin)/_component/Todo";
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -19,21 +19,21 @@ const TodoList: React.FC = () => {
   const config = {
     headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}` },
   };
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/todos/daily', config);
-        if (response.status === 200) {//여러번 타는 것 같음.
-          const todoList = response.data.result.todoList;
-          setTodo(todoList);
-        }
-      } catch (error) {
-        console.error('Error fetching todos:', error);
+  const fetchData = useCallback(async () => {
+    try {
+      const response = await axios.get('/todos/daily', config);
+      if (response.status === 200) {//여러번 타는 것 같음.
+        const todoList = response.data.result.todoList;
+        setTodo(todoList);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching todos:', error);
+    }
+  }, [config]);
    // useEffect hook을 사용하여 데이터 불러오기
-   useEffect(() => {//왜 두번타냐?
+  useEffect(() => {
     fetchData();
-  }, []); // useEffect 의존 배열은 비워둠 (데이터 한 번만 불러오기
+  }, [fetchData]); // useEffect 의존 배열은 비워둠 (데이터 한 번만 불러오기
 
   const sortedTodoList = todo.sort((a: TodoItem, b: TodoItem) => {
     if (a.isFixed && !b.isFixed) {

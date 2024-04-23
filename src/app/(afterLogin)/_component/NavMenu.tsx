@@ -8,16 +8,17 @@ import home from "../../../../public/home.png";
 import Image from "next/image";
 import Link from "next/link";
 import axios from 'axios';
-import React, {useState, useEffect }  from 'react';
+import React, {useState, useEffect, useCallback}  from 'react';
 
 export default function NavMenu() {
   const [name, setName] = useState("DAILY");
   const config = {
     headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}` },
   };
-  const fetchData = async () => {
+  let fetchUrl = '/users/me';
+  const fetchData = useCallback(async () => {
     try {
-      const response = await axios.get('/users/me', config);
+      const response = await axios.get(fetchUrl, config);
        if (response.status === 200) {//여러번 타는 것 같음.
          const userInfo = response.data.result;
          const {name, email} = userInfo;
@@ -26,10 +27,10 @@ export default function NavMenu() {
     } catch (error) {
       console.error('Error fetching todos:', error);
     }
-  };
+  }, [fetchUrl, config]);
   useEffect(() => {//왜 두번타냐?
     fetchData();
-  }, []); // useEffect 의존 배열은 비워둠 (데이터 한 번만 불러오기
+  }, [fetchData]); // useEffect 의존 배열은 비워둠 (데이터 한 번만 불러오기
 
   return (
       <div id="navbar" className="w-72 p-8 fixed bg-slate-300 h-full">
