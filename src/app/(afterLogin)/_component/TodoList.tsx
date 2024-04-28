@@ -75,7 +75,7 @@ const TodoList: React.FC = () => {
       console.error('Error delete todo:', error);
     }
   }
-  const handleClick = async (updated: TodoItem) => {debugger;
+  const handleClick = async (updated: TodoItem) => {
     router.push(`/todo/todoDetail/?todoId=${updated.id}`);
   } 
   return (

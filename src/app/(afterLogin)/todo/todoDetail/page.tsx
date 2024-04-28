@@ -1,9 +1,9 @@
 import TodoDetail from "@/app/(afterLogin)/_component/TodoDetail";
 
-const todoDetail: React.FC = (todoId) => {
+const todoDetail: React.FC = () => {
   return (
     <>
-      <TodoDetail todoId={todoId}/>
+      <TodoDetail/>
     </>
   );
 };

@@ -90,7 +90,6 @@ export default function TodoDetail() {
       isFixed: todoFixed
     };
     try {
-      debugger;
       const response = await axios.patch(`/todos/${todoId}`, formData, config);
       if (response.status === 200) {
         console.log('Todo updated successfully:', response.data);
