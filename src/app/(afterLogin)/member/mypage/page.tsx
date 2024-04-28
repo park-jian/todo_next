@@ -1,19 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import profile from "@/app/data/profile.json";
 import axios from "axios";
-
-const handleButtonClick = (inputId) => {
-  //MyPage 함수 안으로 들어가야 하는거 아님?
-  // const inputElem = document.getElementById(inputId);
-  // inputElem.readOnly = false;
-  //fetchData();
-};
-
-const handleBlurEvent = (e) => {
-  const inputElem = e.target;
-  inputElem.readOnly = true;
-};
 
 export default function MyPage() {
   const [name, setName] = useState("");
@@ -52,7 +39,6 @@ const onLogout = () => {};
         <div
           id="member_wrap"
           className="mt-4 border flex"
-          onBlur={handleBlurEvent}
         >
           <div className="m-0 h-full align-middle box-border pl-2 pt-3 pb-3 text-sm w-24 border-r bg-slate-200">
             이름
@@ -70,7 +56,6 @@ const onLogout = () => {};
         <div
           id="member_wrap"
           className="mt-4 border flex"
-          onBlur={handleBlurEvent}
         >
           <div className="m-0 h-full align-middle box-border pl-2 pt-3 pb-3 text-sm w-24 border-r bg-slate-200">
             이메일
@@ -87,7 +72,6 @@ const onLogout = () => {};
         <div
           id="member_wrap"
           className="mt-4 border flex"
-          onBlur={handleBlurEvent}
         >
           <button className="m-0 align-middle box-border py-3 text-sm w-full h-full bg-slate-200 text-center" onClick={onLogout}>
             로그아웃
