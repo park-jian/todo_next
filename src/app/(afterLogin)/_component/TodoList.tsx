@@ -36,7 +36,6 @@ const TodoList: React.FC = () => {
   }, []);
    // useEffect hook을 사용하여 데이터 불러오기
   useEffect(() => {
-    debugger;
     //fetchData();
     // 라우터 이벤트 감지
 
