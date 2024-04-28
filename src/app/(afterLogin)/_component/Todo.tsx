@@ -20,20 +20,28 @@ interface TodoProps {
   // content: string;
   // date: string;
   todo: TodoItem;
+  onUpdate: (updatedTodo: TodoItem) => void;
+  onDelete: (deletedTodo: TodoItem) => void;
+  onClick: (clickedTodo: TodoItem) => void;
 }
 const Todo: React.FC<TodoProps> = ({ todo, onUpdate, onDelete, onClick}) => {
   const { id, isFixed, content, checked, title } = todo;//content가 아니라 title이어야 한다.
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //debugger;
     const checked = e.target.checked ? true : false;
     onUpdate({ ...todo, checked });
   };
-  const handleDelete = (e) => onDelete(todo);
-  const handleClick = (e) => {
-    if (e.target.id === "checkTodo" || e.target.id === "deleteTodo") return;
-    onClick(todo);
+  const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    //debugger;
+    e.stopPropagation();
+    onDelete(todo);
+  }
+  const handleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation();
+    if (e.currentTarget && e.currentTarget.id === "todoOne") onClick(todo);
   }
   return (
-    <div className='bg-slate-400 w-3/4 rounded-xl h-12 p-2 m-4' onClick={handleClick}>
+    <div id="todoOne" className='bg-slate-400 w-3/4 rounded-xl h-12 p-2 m-4' onClick={handleClick}>
       <div className='flex relative justify-center'>
         <input
         className='absolute start-0 w-6 h-6'

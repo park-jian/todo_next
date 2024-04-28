@@ -6,7 +6,7 @@ import axios from 'axios';
 import {ChangeEventHandler, FormEventHandler, useState} from "react";
 import Link from "next/link";
 
-export default function AddTodoModal({open}) {
+export default function AddTodoModal({open}: any) {
   const selectList = ["DAILY", "WEEKLY", "YEARLY"];
   const [todoType, setTodoType] = useState("DAILY");
   const [todoDate, setTodoDate] = useState("");
@@ -16,7 +16,9 @@ export default function AddTodoModal({open}) {
   const [isOpen, setIsOpen] = useState(open);
   const router = useRouter();
 
-  const handleInputChange = (e) => {
+  ////const handleInputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {  HTMLSelectElement || HTMLInputElement || HTMLTextAreaElement 3개를 모두 포함하는 하나의 타입??
+  //https://merrily-code.tistory.com/157
+  const handleInputChange = (e: any) => {
     const { id, value } = e.target;
     switch (id) {
       case "type":
@@ -38,7 +40,8 @@ export default function AddTodoModal({open}) {
         break;
     }
   };
-  const handleCanCelModal = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // const handleCanCelModal = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleCanCelModal = (e: any) => {
     e.preventDefault(); // 기본 이벤트 방지
     //넣은것 취소 해야함.
     setTodoType("DAILY");

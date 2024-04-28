@@ -33,9 +33,9 @@ export default function Fullcalendar({...events}: props[]) {
     ]
     //, calendarEvents: events 
   });
-
   useEffect(() => {
     let draggableEl = document.getElementById("external-events");
+    console.log("fullCalendar호출:", draggableEl);
     new Draggable(draggableEl, {
       itemSelector: ".fc-event",
       eventData: function (eventEl) {
@@ -52,11 +52,10 @@ export default function Fullcalendar({...events}: props[]) {
           create: true
         };
       }
-    }
-  );
+    });
   }, [state.externalEvents]);
 
-  const handleEventReceive = (eventInfo) => {
+  const handleEventReceive = (eventInfo: any) => {
     const newEvent = {
       id: eventInfo.draggedEl.getAttribute("data-id"),
       title: eventInfo.draggedEl.getAttribute("title"),

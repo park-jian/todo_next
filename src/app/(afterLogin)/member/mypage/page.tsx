@@ -38,6 +38,7 @@ export default function MyPage() {
  useEffect(() => {//왜 두번타냐?
   fetchData();
 }, []); // useEffect 의존 배열은 비워둠 (데이터 한 번만 불러오기
+const onLogout = () => {};
 
   return (
     <>
@@ -53,7 +54,7 @@ export default function MyPage() {
           className="mt-4 border flex"
           onBlur={handleBlurEvent}
         >
-          <div className="m-0 h-full align-middle box-border pl-2 pt-3 pb-3 text-sm w-24 border-r">
+          <div className="m-0 h-full align-middle box-border pl-2 pt-3 pb-3 text-sm w-24 border-r bg-slate-200">
             이름
           </div>
           <input
@@ -71,7 +72,7 @@ export default function MyPage() {
           className="mt-4 border flex"
           onBlur={handleBlurEvent}
         >
-          <div className="m-0 h-full align-middle box-border pl-2 pt-3 pb-3 text-sm w-24 border-r">
+          <div className="m-0 h-full align-middle box-border pl-2 pt-3 pb-3 text-sm w-24 border-r bg-slate-200">
             이메일
           </div>
           <input
@@ -83,8 +84,15 @@ export default function MyPage() {
             readOnly
           />
         </div>
-
-
+        <div
+          id="member_wrap"
+          className="mt-4 border flex"
+          onBlur={handleBlurEvent}
+        >
+          <button className="m-0 align-middle box-border py-3 text-sm w-full h-full bg-slate-200 text-center" onClick={onLogout}>
+            로그아웃
+            </button>
+        </div>
 
       </div>
     </>  

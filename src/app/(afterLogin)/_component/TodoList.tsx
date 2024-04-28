@@ -1,11 +1,11 @@
 "use client";
-import React, {useState, useEffect, useCallback }  from 'react';
+import React, {useState, useEffect, useCallback, useMemo }  from 'react';
 import Todo from "@/app/(afterLogin)/_component/Todo";
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 interface TodoItem {
-  id: number;
+  id: string;
   title: string;
   content: string;
   date: string;
@@ -15,26 +15,37 @@ interface TodoItem {
 }
 const TodoList: React.FC = () => {
   const [todo, setTodo] = useState<TodoItem[]>([]); // 상태 변수 선언
+  const pathname = usePathname()
   const router = useRouter();
   const config = {
     headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}` },
   };
   const fetchData = useCallback(async () => {
     try {
-      const response = await axios.get('/todos/daily', config);
-      if (response.status === 200) {//여러번 타는 것 같음.
+      const response = await axios.get('/todos/daily', {
+        headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}` },
+      });
+      if (response.status === 200) {
         const todoList = response.data.result.todoList;
+        console.log("todoList:",todoList);
         setTodo(todoList);
       }
     } catch (error) {
       console.error('Error fetching todos:', error);
     }
-  }, [config]);
+  }, []);
    // useEffect hook을 사용하여 데이터 불러오기
   useEffect(() => {
-    fetchData();
-  }, [fetchData]); // useEffect 의존 배열은 비워둠 (데이터 한 번만 불러오기
+    debugger;
+    //fetchData();
+    // 라우터 이벤트 감지
 
+      // 홈 페이지로 이동할 때마다 fetchData 함수 호출
+     // if (pathname === '/home') {
+        fetchData();
+     // }
+
+  }, []); // useEffect 의존 배열은 비워둠 (데이터 한 번만 불러오기
   const sortedTodoList = todo.sort((a: TodoItem, b: TodoItem) => {
     if (a.isFixed && !b.isFixed) {
       return -1;
@@ -65,7 +76,7 @@ const TodoList: React.FC = () => {
       console.error('Error delete todo:', error);
     }
   }
-  const handleClick = async (updated: TodoItem) => {
+  const handleClick = async (updated: TodoItem) => {debugger;
     router.push(`/todo/todoDetail/?todoId=${updated.id}`);
   } 
   return (

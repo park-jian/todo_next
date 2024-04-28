@@ -10,8 +10,8 @@ import Link from "next/link";
 import axios from 'axios';
 import React, {useState, useEffect, useCallback}  from 'react';
 
-export default function NavMenu() {
-  const [name, setName] = useState("DAILY");
+export default function LeftNavMenu() {
+  const [name, setName] = useState("");
   const config = {
     headers: { Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}` },
   };
@@ -33,7 +33,7 @@ export default function NavMenu() {
   }, [fetchData]); // useEffect 의존 배열은 비워둠 (데이터 한 번만 불러오기
 
   return (
-      <div id="navbar" className="w-72 p-8 fixed bg-slate-300 h-full">
+      <nav id="navbar" className="w-72 p-8 fixed bg-slate-300 h-full">
         <Link href="/home">
         <div className="w-full h-12 flex mb-3">
           <div className="mr-3 flex justify-center items-center">
@@ -112,6 +112,6 @@ export default function NavMenu() {
         </div>
         </Link>
 
-      </div>
+      </nav>
   )
 }

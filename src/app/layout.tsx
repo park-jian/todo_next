@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 // import { Inter } from "next/font/google";
 import "./globals.css";
-import AuthSession from "@/app/_component/AuthSession";
+//import AuthSession from "@/app/_component/AuthSession";
 import { CookiesProvider } from 'react-cookie';
 
 export default function RootLayout({
@@ -12,11 +12,11 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full w-full">
       <body className="h-full w-full">
-        <AuthSession>
+        {/* <AuthSession> */}
           {/* <CookiesProvider> // 쿠키 provider */}
             {children}
           {/* </CookiesProvider> / 쿠키 provider */}
-        </AuthSession>
+        {/* </AuthSession> */}
       </body>
     </html>
   );

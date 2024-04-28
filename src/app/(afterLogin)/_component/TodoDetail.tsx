@@ -49,7 +49,7 @@ export default function TodoDetail() {
   useEffect(() => {
     fetchData();
   }, []); // useEffect 의존 배열은 비워둠 (데이터 한 번만 불러오기
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { id, value } = e.target;
     switch (id) {
       case "type":
@@ -71,7 +71,7 @@ export default function TodoDetail() {
         break;
     }
   };
-  const handleCanCelModal = (e) => {
+  const handleCanCelModal = (e: any) => {
     e.preventDefault(); // 기본 이벤트 방지
     setTodoType("");
     setTodoDate("");
@@ -90,11 +90,14 @@ export default function TodoDetail() {
       isFixed: todoFixed
     };
     try {
+      debugger;
       const response = await axios.patch(`/todos/${todoId}`, formData, config);
       if (response.status === 200) {
         console.log('Todo updated successfully:', response.data);
         closePopup();
-        router.back();
+        router.push('/home');
+        router.refresh();
+        //router.back();
       }
     } catch (error) {
       console.error('Error adding todo:', error);
