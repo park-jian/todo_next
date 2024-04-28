@@ -1,4 +1,3 @@
-import Main from "@/app/(beforeLogin)/_component/Main";
 //import { useSession } from "next-auth/react";
 // import {auth} from "@/auth";
 import {redirect} from "next/navigation";
