@@ -3,10 +3,17 @@
 import style from './AddTodoModal.module.css';
 import {useRouter, useSearchParams } from "next/navigation";
 import axios from 'axios';
-import {ChangeEventHandler, FormEventHandler, useState, useEffect} from "react";
+import {ChangeEventHandler, FormEventHandler, useState, useEffect, Suspense } from "react";
 import Link from "next/link";
 
 export default function TodoDetail() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TodoDetailContent />
+    </Suspense>
+  );
+}
+function TodoDetailContent() {
   const selectList = ["DAILY", "WEEKLY", "YEARLY"];
   const [todoType, setTodoType] = useState("");
   const [todoTitle, setTodoTitle] = useState("");
